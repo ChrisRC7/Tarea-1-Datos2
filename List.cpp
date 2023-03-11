@@ -4,45 +4,130 @@
 
 class List
 {
-private: 
-    Node *head;
-    int size;
-    Collector *collector;
+private:
+    static Node *head;
+    static Node *tail;
+    static int size;
+    static Collector *collector;
 
-public: 
+public:
     List()
     {
         this->head = NULL;
+        this->tail = NULL;
         this->size = 0;
         this->collector = new Collector();
     };
 
 public:
-    void insertFirst(int data)
+    Node search(int searchData)
     {
-        if (collector->isEmpty()) {
-            
-        } else { 
-
+        Node *current = this->head;
+        while (current->getData() != NULL)
+        {
+            if (current->getData() == searchData) {
+                return *current;
+            } else {
+                current = current->getNext();
+            }
         }
-        Node *newNode = NULL;
-        newNode = new Node(data);
-        newNode->setNext(this->head);
-        this->head = newNode;
-        this->size++;
+
+        return NULL;
+    }
+
+public:
+    void *operator new(size_t prueba, int data)
+    {
+        if (collector->isEmpty())
+        { // crear espacio con malloc ya que el Collector no tiene espacios disponibles
+            static Node *newNode = (Node *)malloc(sizeof(Node));
+            newNode->setData(data);
+
+            if (head == NULL) { // Si la lista esta vacia, el head y tail son los mismos
+                head = newNode;
+                tail = newNode;
+
+                head->setNext(tail);
+                head->setPrevious(tail);
+
+                tail->setNext(head);
+                tail->setPrevious(head);
+            } else {
+                newNode->setNext(head);
+                newNode->setPrevious(tail);
+
+                tail->setNext(newNode);
+                head->setPrevious(newNode);
+
+                head = newNode;
+            }
+            size++;
+        }
+        else
+        { // reutiliza espacio de memoria, por lo que llamamos al Collector
+            Node *newNode = collector->deleteFirst();
+            newNode->setData(data);
+
+            if (head == NULL) { // Si la lista esta vacia, el head y tail son los mismos
+                head = newNode;
+                tail = newNode;
+
+                head->setNext(tail);
+                head->setPrevious(tail);
+
+                tail->setNext(head);
+                tail->setPrevious(head);
+            } else {
+                newNode->setNext(head);
+                newNode->setPrevious(tail);
+
+                tail->setNext(newNode);
+                head->setPrevious(newNode);
+
+                head = newNode;
+            }
+            size++;
+        }
     };
 
 public: 
-    int getFirst() {
-        if (this->head != NULL) {
+    void deletE(int deleteData) {
+        Node *current = this->head;
+        Node *temp= this->head;
+
+        while (current->getData() != NULL)
+        {
+            if (current->getData() == deleteData) {
+                //Proceso de eliminar
+                temp = current->getNext();
+                current->getPrevious()->setNext(temp);
+                temp->setPrevious(current->getPrevious());
+                size--;
+            } else {
+                temp = current;
+                current = current->getNext();
+            }
+        }
+        
+        printf("El valor %i a eliminar no se encuentra en al lista", deleteData);
+    }
+
+public:
+    int getFirst()
+    {
+        if (this->head != NULL)
+        {
             return this->head->getData();
-        } else {
+        }
+        else
+        {
             return NULL;
         }
     }
 
-public: 
-    void modifyFirst(int data) {
+public:
+    void modifyFirst(int data)
+    {
         this->head->setData(data);
     }
 
