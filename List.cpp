@@ -95,7 +95,7 @@ public:
         Node *current = this->head;
         Node *temp= this->head;
 
-        while (current->getData() != NULL)
+        while (current != NULL)
         {
             if (current->getData() == deleteData) {
                 //Proceso de eliminar
@@ -103,6 +103,7 @@ public:
                 current->getPrevious()->setNext(temp);
                 temp->setPrevious(current->getPrevious());
                 size--;
+                break;
             } else {
                 temp = current;
                 current = current->getNext();
@@ -112,7 +113,7 @@ public:
         printf("El valor %i a eliminar no se encuentra en al lista", deleteData);
     }
 
-public:
+/*public:
     int getFirst()
     {
         if (this->head != NULL)
@@ -123,7 +124,7 @@ public:
         {
             return NULL;
         }
-    }
+    }*/
 
 public:
     void modifyFirst(int data)
@@ -131,5 +132,16 @@ public:
         this->head->setData(data);
     }
 
+public: 
+    void displayList()
+    {
+        Node *current = head;
+        printf("%d", current->getData());
+        while (current != tail)
+        {
+            printf("%d", current->getData());
+            current = current->getNext();
+        }
+    };
 
 };

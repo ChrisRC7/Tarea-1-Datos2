@@ -66,7 +66,7 @@ public:
     };
 };
 
-int main()
+/*int main()
 {
     Collector *Prueba;
     Prueba = new Collector();
@@ -78,4 +78,4 @@ int main()
     Prueba->displayList();
 
     return 0;
-};
+};*/
