@@ -1,13 +1,15 @@
 #include "Collector.cpp"
 
-class List
-{
+/* It's a circular doubly linked list with a collector */
+class List {
+/* It's declaring the variables that will be used in the class. */
 private:
     Node *head;
     Node *tail;
     int size;
     Collector *collector;
 
+/* It's the constructor of the class. */
 public:
     List()
     {
@@ -17,12 +19,18 @@ public:
         this->collector = new Collector();
     };
 
+/* It's adding a new node to the list. */
 public:
-    void neW(int newData)
-    {
-        if (collector->isEmpty())
-        { // Collector vacio, MALLOC
-            Node *newNode = (Node *)malloc(sizeof(Node));
+    /**
+     * If the collector is empty, allocate a new node and add it to the list.
+     *
+     * If the collector is not empty, get a node from the collector and add it to the list.
+     *
+     * @param newData The data that will be stored in the new node.
+     */
+    void neW(int newData) {
+        if (collector->isEmpty()) { //Collector vacio, MALLOC
+            Node *newNode = (Node*)malloc(sizeof(Node));
             newNode->setData(newData);
 
             if (head == NULL)
@@ -78,9 +86,16 @@ public:
         }
     }
 
+/* It's deleting a node from the list and inserting it into the collector list. */
 public:
     void deletE(int deleteData)
     {
+    /**
+     * It deletes a node from the list and inserts it into the collector list
+     *
+     * @param deleteData The data to be deleted from the list.
+     */
+    void deletE(int deleteData) {
         Node *current = head;
         Node *temp = head;
 
@@ -111,6 +126,7 @@ public:
             printf("Se ha eliminado %i de la lista\n\n", deleteData);
         }
     }
+/* It's displaying the list. */
 
 public:
     void printFirst()
@@ -178,6 +194,9 @@ public:
     }
 
 public:
+    /**
+     * It prints the list
+     */
     void displayList()
     {
         printf(" ------ Displaying LIST con %i de elementos ------\n", size);
@@ -191,8 +210,10 @@ public:
 
         printf("%d \tPosicion de memoria: %p\n\n", current->getData(), current);
 
+
         collector->displayList();
 
         printf("\n\n\n");
+
     };
 };
