@@ -124,7 +124,6 @@ public:
             printf("Se ha eliminado %i de la lista\n\n", deleteData);
         }
     }
-/* It's displaying the list. */
 
 public:
     void printFirst()
@@ -191,6 +190,7 @@ public:
         }
     }
 
+/* It's displaying the list. */
 public:
     /**
      * It prints the list
