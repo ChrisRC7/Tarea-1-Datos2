@@ -1,15 +1,16 @@
 #include <bits/stdc++.h>
 #include <iostream>
 #include "Node.cpp" 
-/* It creates a linked list that stores integers */
+
 class Collector
 {
 
-
-/* Creating a constructor for the class. */
 public:
+   
     /**
-     * This function is a constructor for the Collector class
+     * @brief function `instance()` returns a pointer to a `Collector` object
+     * 
+     * @return A pointer to the instance of the Collector class.
      */
     static Collector* instance()
     {  
@@ -18,7 +19,7 @@ public:
     };
 
     /**
-     * It returns true if the size of the list is 0, otherwise it returns false.
+     * @brief It returns true if the size of the list is 0, otherwise it returns false.
      * 
      * @return A boolean value.
      */
@@ -28,7 +29,7 @@ public:
     };
 
     /**
-     * It returns the size of the array.
+     * @brief It returns the size of the array.
      * 
      * @return The size of the array.
      */
@@ -38,9 +39,9 @@ public:
     };
 
     /**
-     * It inserts a new node at the beginning of the list.
+     * @brief It inserts a new node at the beginning of the list.
      * 
-     * @param data The data that you want to insert into the linked list.
+     * @param newNode The node that you want to insert into the list.
      */
     void insertFirst(Node *newNode)
     {
@@ -50,7 +51,7 @@ public:
     };
 
     /**
-     * It deletes the first node in the linked list.
+     * @brief It deletes the first node in the linked list.
      * 
      * @return The first node in the list.
      */
@@ -68,8 +69,9 @@ public:
             return NULL;
         }
     };
+
     /**
-     * It prints the list.
+     * @brief It prints the list.
      */
     void displayList()
     {
@@ -82,22 +84,12 @@ public:
     };
 
     private:
+    /**
+     * @brief A constructor for the Collector class. It initializes the head pointer to NULL and the size to
+     * 0.
+     */
     Collector() : head(NULL), size(0){}
     Node* head;
     int size;
 
 };
-
-/*int main()
-{
-    Collector *Prueba;
-    Prueba = new Collector();
-    Prueba->insertFirst(1);
-    Prueba->insertFirst(2);
-    Prueba->insertFirst(3);
-    Prueba->insertFirst(4);
-    Prueba->insertFirst(5);
-    Prueba->displayList();
-
-    return 0;
-};*/

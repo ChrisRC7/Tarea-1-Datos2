@@ -17,14 +17,15 @@ public:
         size=0;
 }
 
-
-
     /**
-     * If the collector is empty, allocate a new node and add it to the list.
-     *
-     * If the collector is not empty, get a node from the collector and add it to the list.
-     *
-     * @param newData The data that will be stored in the new node.
+     * @brief If the collector is empty, then we use malloc to create a new node, otherwise we use the
+     * collector to get a node
+     * 
+     * @param sizet The size of the memory block, in bytes.
+     * @param newData The data that will be stored in the node.
+     * @param list The list where the new node will be added.
+     * 
+     * @return A pointer to the new allocated memory.
      */
     void* operator new(size_t sizet,int newData, List* list) {
        
@@ -87,11 +88,12 @@ public:
         return ptr;
     }
 
-
     /**
-     * It deletes a node from the list and inserts it into the collector list
-     *
-     * @param deleteData The data to be deleted from the list.
+     * @brief This function deletes a node from the list
+     * 
+     * @param Void This is the pointer to the memory that is being deleted.
+     * @param deleteData The data to be deleted from the list
+     * @param list The list that the node is being deleted from.
      */
     void operator delete(void* Void, int deleteData, List* list) {
         Node *current = list->head;
@@ -203,10 +205,10 @@ public:
     /**
      * It prints the list
      */
-    void displayList(List* list)
+    void displayList()
     {
-        printf(" ------ Displaying LIST con %i de elementos ------\n", list->size);
-        Node *current = list->head;
+        printf(" ------ Displaying LIST con %i de elementos ------\n", size);
+        Node *current = head;
 
         while (current != tail)
         {
