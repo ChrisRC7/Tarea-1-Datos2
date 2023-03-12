@@ -4,27 +4,19 @@
 /* It creates a linked list that stores integers */
 class Collector
 {
-/* Creating a private variable called head that is a pointer to a Node. */
-private:
-    Node *head;
 
-/* Creating a private variable called size that is an integer. */
-private:
-    int size;
 
 /* Creating a constructor for the class. */
 public:
     /**
      * This function is a constructor for the Collector class
      */
-    Collector()
-    {
-        this->head = NULL;
-        this->size = 0;
+    static Collector* instance()
+    {  
+        static Collector* instance= new Collector();
+        return instance;
     };
 
-/* A function that returns true if the size of the list is 0, otherwise it returns false. */
-public:
     /**
      * It returns true if the size of the list is 0, otherwise it returns false.
      * 
@@ -35,8 +27,6 @@ public:
         return this->size == 0;
     };
 
-/* Returning the size of the array. */
-public:
     /**
      * It returns the size of the array.
      * 
@@ -47,8 +37,6 @@ public:
         return this->size;
     };
 
-/* Creating a new node and setting the next node to the head. */
-public:
     /**
      * It inserts a new node at the beginning of the list.
      * 
@@ -61,8 +49,6 @@ public:
         this->size++;
     };
 
-/* Deleting the first node in the linked list. */
-public:
     /**
      * It deletes the first node in the linked list.
      * 
@@ -82,9 +68,6 @@ public:
             return NULL;
         }
     };
-
-/* Printing the list. */
-public:
     /**
      * It prints the list.
      */
@@ -97,6 +80,12 @@ public:
             current = current->getNext();
         }
     };
+
+    private:
+    Collector() : head(NULL), size(0){}
+    Node* head;
+    int size;
+
 };
 
 /*int main()

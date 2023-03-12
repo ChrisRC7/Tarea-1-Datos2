@@ -4,17 +4,22 @@
 #include "List.cpp"
 
 int main() {
+    List* list= (List*)malloc(sizeof(List));
+    list->operator new(NULL, 5, list);
+    list->operator new(NULL, 8, list);
+    list->displayList(list);
+    list->operator new(NULL, 14, list);
+    list->operator new(NULL, 15, list);
+    list->operator new(NULL, 16, list);
+    list->operator new(NULL, 17, list);
+    list->operator new(NULL, 80, list);
+    list->displayList(list);
+    list->operator delete(NULL, 14, list);
 
-    List *list = new List();
-    list->neW(9);
-    list->neW(14);
-    list->neW(15);
-    list->neW(16);
-    list->neW(17);
-    list->displayList();
-
-    list->changeFirst(16);
-    list->displayList();
+    
+    list->changeFirst(20);
+    list->operator new(NULL, 69, list);
+    list->displayList(list);
 
     return 0;
 }

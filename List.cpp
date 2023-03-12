@@ -7,20 +7,18 @@ private:
     Node *head;
     Node *tail;
     int size;
-    Collector *collector;
+  
 
 /* It's the constructor of the class. */
 public:
-    List()
-    {
-        this->head = NULL;
-        this->tail = NULL;
-        this->size = 0;
-        this->collector = new Collector();
-    };
+    List(){ 
+        head= NULL;
+        tail= NULL;
+        size=0;
+}
 
-/* It's adding a new node to the list. */
-public:
+
+
     /**
      * If the collector is empty, allocate a new node and add it to the list.
      *
@@ -28,74 +26,76 @@ public:
      *
      * @param newData The data that will be stored in the new node.
      */
-    void neW(int newData) {
-        if (collector->isEmpty()) { //Collector vacio, MALLOC
+    void* operator new(size_t sizet,int newData, List* list) {
+       
+        if (Collector::instance()->isEmpty()) { //Collector vacio, MALLOC
             Node *newNode = (Node*)malloc(sizeof(Node));
             newNode->setData(newData);
 
-            if (head == NULL)
+            if (list->head == NULL)
             {
-                head = newNode;
-                tail = newNode;
+                list->head = newNode;
+                list->tail = newNode;
 
-                head->setNext(tail);
-                head->setPrevious(tail);
+                list->head->setNext(list->tail);
+                list->head->setPrevious(list->tail);
 
-                tail->setNext(head);
-                tail->setPrevious(head);
+                list->tail->setNext(list->head);
+                list->tail->setPrevious(list->head);
             }
             else
             {
-                newNode->setNext(head);
-                newNode->setPrevious(tail);
+                newNode->setNext(list->head);
+                newNode->setPrevious(list->tail);
 
-                tail->setNext(newNode);
-                head->setPrevious(newNode);
+                list->tail->setNext(newNode);
+                list->head->setPrevious(newNode);
 
-                head = newNode;
+                list->head = newNode;
             }
-            size++;
+            list->size++;
         }
         else
         {
-            Node *newNode = collector->deleteFirst();
+            Node *newNode = Collector::instance()->deleteFirst();
             *newNode = newData;
 
-            if (head == NULL)
+            if (list->head == NULL)
             {
-                head = newNode;
-                tail = newNode;
+                list->head = newNode;
+                list->tail = newNode;
 
-                head->setNext(tail);
-                head->setPrevious(tail);
+                list->head->setNext(list->tail);
+                list->head->setPrevious(list->tail);
 
-                tail->setNext(head);
-                tail->setPrevious(head);
+                list->tail->setNext(list->head);
+                list->tail->setPrevious(list->head);
             }
             else
             {
-                newNode->setNext(head);
-                newNode->setPrevious(tail);
+                newNode->setNext(list->head);
+                newNode->setPrevious(list->tail);
 
-                tail->setNext(newNode);
-                head->setPrevious(newNode);
+                list->tail->setNext(newNode);
+                list->head->setPrevious(newNode);
 
-                head = newNode;
+                list->head = newNode;
             }
-            size++;
+            list->size++;
         }
+        void* ptr= malloc(sizet);
+        return ptr;
     }
 
-/* It's deleting a node from the list and inserting it into the collector list. */
-public:
+
     /**
      * It deletes a node from the list and inserts it into the collector list
      *
      * @param deleteData The data to be deleted from the list.
      */
-    void deletE(int deleteData) {
-        Node *current = head;
-        Node *temp = head;
+    void operator delete(void* Void, int deleteData, List* list) {
+        Node *current = list->head;
+        Node *temp = list->head;
 
         while (current != NULL)
         {
@@ -104,8 +104,8 @@ public:
                 temp = current->getNext();
                 current->getPrevious()->setNext(temp);
                 temp->setPrevious(current->getPrevious());
-                collector->insertFirst(current);
-                size--;
+                Collector::instance()->insertFirst(current);
+                list->size--;
                 break;
             }
             else
@@ -125,19 +125,28 @@ public:
         }
     }
 
-public:
+
+    /**
+     * It prints the value of the first node in the list
+     */
     void printFirst()
     {
-        printf("El valor al inicio de esta lista es: %i\n", head->getData());
+        List* list= static_cast<List*>(NULL);
+        printf("El valor al inicio de esta lista es: %i\n", list->head->getData());
     }
 
-public:
+
+    /**
+     * This function changes the data of the first node in the linked list
+     * 
+     * @param setData The data you want to set the first node to.
+     */
     void changeFirst(int setData)
     {
         head->setData(setData);
     }
 
-public:
+
     void setFirst(int setData)
     {
         if (!(head->getData() == setData))
@@ -190,15 +199,14 @@ public:
         }
     }
 
-/* It's displaying the list. */
-public:
+
     /**
      * It prints the list
      */
-    void displayList()
+    void displayList(List* list)
     {
-        printf(" ------ Displaying LIST con %i de elementos ------\n", size);
-        Node *current = head;
+        printf(" ------ Displaying LIST con %i de elementos ------\n", list->size);
+        Node *current = list->head;
 
         while (current != tail)
         {
@@ -209,7 +217,7 @@ public:
         printf("%d \tPosicion de memoria: %p\n\n", current->getData(), current);
 
 
-        collector->displayList();
+        Collector::instance()->displayList();
 
         printf("\n\n\n");
 
