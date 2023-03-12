@@ -1,21 +1,20 @@
-#include <stdio.h> 
 #include <iostream>
-#include "Node.cpp"
-#include "Collector.cpp"
+//#include "Node.cpp"
+//#include "Collector.cpp"
 #include "List.cpp"
-
-void prueba() {
-    List *list;
-    list->operator new(sizeof(int), 7);
-
-    list->displayList();
-
-}
 
 int main() {
 
-    prueba();
-    
-    return 0;
+    List *list = new List();
+    list->neW(9);
+    list->neW(14);
+    list->neW(15);
+    list->neW(16);
+    list->neW(17);
+    list->displayList();
 
+    list->setFirst(9);
+    list->displayList();
+
+    return 0;
 }

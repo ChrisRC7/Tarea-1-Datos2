@@ -29,10 +29,10 @@ public:
     };
 
 public:
-    void insertFirst(int data)
+    void insertFirst(Node *newNode)
     {
-        Node *newNode = NULL;
-        newNode = new Node(data);
+        //printf("\nEntro al insertFirst de Collector\n");
+        //printf("%d \tPosicion de memoria: %p\n", newNode->getData(), *newNode);
         newNode->setNext(this->head);
         this->head = newNode;
         this->size++;
@@ -57,25 +57,12 @@ public:
 public:
     void displayList()
     {
+        printf(" ------ Displaying COLLECTOR con %i de elementos ------\n", size);
         Node *current = this->head;
         while (current != NULL)
         {
-            printf("%d", current->getData());
+            printf("%d \tPosicion de memoria: %p\n", current->getData(), current);
             current = current->getNext();
         }
     };
 };
-
-/*int main()
-{
-    Collector *Prueba;
-    Prueba = new Collector();
-    Prueba->insertFirst(1);
-    Prueba->insertFirst(2);
-    Prueba->insertFirst(3);
-    Prueba->insertFirst(4);
-    Prueba->insertFirst(5);
-    Prueba->displayList();
-
-    return 0;
-};*/
