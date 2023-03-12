@@ -13,7 +13,7 @@ int main() {
     list->neW(17);
     list->displayList();
 
-    list->setFirst(9);
+    list->changeFirst(16);
     list->displayList();
 
     return 0;

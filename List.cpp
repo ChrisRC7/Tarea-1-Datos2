@@ -88,8 +88,6 @@ public:
 
 /* It's deleting a node from the list and inserting it into the collector list. */
 public:
-    void deletE(int deleteData)
-    {
     /**
      * It deletes a node from the list and inserts it into the collector list
      *

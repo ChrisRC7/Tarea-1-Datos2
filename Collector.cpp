@@ -54,10 +54,8 @@ public:
      * 
      * @param data The data that you want to insert into the linked list.
      */
-    void insertFirst(int data)
+    void insertFirst(Node *newNode)
     {
-        Node *newNode = NULL;
-        newNode = new Node(data);
         newNode->setNext(this->head);
         this->head = newNode;
         this->size++;
